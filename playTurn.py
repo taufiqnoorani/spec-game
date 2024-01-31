@@ -16,4 +16,4 @@ def player_turn(player, players, round_scores):
     # Validate the row and column values
     if not (1 <= row <= 5 and 1 <= col <= 5):
         print("Invalid row or column. Please choose values between 1 and 5.")
-        return
+    return

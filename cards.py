@@ -12,8 +12,11 @@ def create_deck_dataframe():
     # Create a DataFrame from the list of tuples
     deck_df = pd.DataFrame(cards, columns=['Rank', 'Suit'])
 
-    return deck_df
+    #TODO: need to assign unique id to each card
+    dict_cards = {}
+    for t in cards:
+        key = len(dict_cards)
+        dict_cards[key] = t
 
-# Example usage:
-deck_df = create_deck_dataframe()
-print(deck_df)
+    return dict_cards
+
