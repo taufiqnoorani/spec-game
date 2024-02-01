@@ -1,0 +1,6 @@
+,0,1,2,3,4
+0,"['10', 'Heart']","['Jack', 'Spade']","['King', 'Club']","['Jack', 'Club']","['10', 'Diamond']"
+1,"['A', 'Club']","['Queen', 'Club']","['King', 'Diamond']","['A', 'Diamond']","['2', 'Heart']"
+2,"['A', 'Heart']","['A', 'Spade']","['2', 'Spade']","['Queen', 'Heart']","['2', 'Diamond']"
+3,"['King', 'Spade']","['2', 'Club']","['Jack', 'Diamond']","['Queen', 'Spade']","['Joker', 'Joker']"
+4,"['Jack', 'Heart']","['King', 'Heart']","['Queen', 'Diamond']","['10', 'Club']","['10', 'Spade']"
