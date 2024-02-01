@@ -2,17 +2,17 @@ import pandas as pd
 import random
 
 #My file path is different for some reason, use which ever works for you
-#filePath = "spec-game/"
-filePath = ""
+filePath = "spec-game/"
+#filePath = ""
 
 #The main file should have this globally declared in the future
 #For displaying in the terminal, might be cleaner to show the symbol instead of the text for suites
-SPADE = "♠";
-HEART = "♥";
-CLUB = "♣";
-DIAMOND = "♦";
-JOKER = "🃏";
-#print(SPADE+HEART+CLUB+DIAMOND+JOKER);
+suiteDict = {"Spade": "♠",
+             "Heart": "♥",
+             "Club": "♣",
+             "Diamond": "♦",
+             "Joker": "🃏"}
+
 
 def getScorecards():
     scorecards = pd.read_csv(filePath+"scorecards.csv")
@@ -34,14 +34,14 @@ def generateGrid(showcards):
     grid = pd.DataFrame()
     column = 0
     for i in randomList:
-        rowList.append([showcards.iloc[i].Rank,showcards.iloc[i].Suite])
+        rowList.append([showcards.iloc[i].Rank,showcards.iloc[i].Suite,0])
         column+=1
         if(column==5):
             column=0
             grid = pd.concat([grid, pd.DataFrame([rowList])], ignore_index=True)
             rowList.clear()
 
-    print(grid)
+    #print(grid)
     grid.to_csv(filePath+"grid.csv")
             
 

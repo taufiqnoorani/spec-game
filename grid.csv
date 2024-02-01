@@ -1,6 +1,6 @@
 ,0,1,2,3,4
-0,"['King', 'Spade']","['A', 'Diamond']","['2', 'Club']","['2', 'Heart']","['10', 'Heart']"
-1,"['10', 'Club']","['King', 'Diamond']","['Jack', 'Spade']","['Queen', 'Diamond']","['A', 'Spade']"
-2,"['Joker', 'Joker']","['Jack', 'Heart']","['2', 'Spade']","['Queen', 'Heart']","['Queen', 'Club']"
-3,"['10', 'Spade']","['10', 'Diamond']","['Jack', 'Club']","['A', 'Club']","['King', 'Heart']"
-4,"['Queen', 'Spade']","['2', 'Diamond']","['Jack', 'Diamond']","['A', 'Heart']","['King', 'Club']"
+0,"[' Ace ', 'Spade', 0]","['  10 ', 'Diamond', 0]","['Queen', 'Diamond', 0]","['Queen', 'Spade', 0]","['  2  ', 'Diamond', 0]"
+1,"['Jack ', 'Heart', 0]","['Queen', 'Club', 0]","['Jack ', 'Spade', 0]","[' Ace ', 'Diamond', 0]","['King ', 'Spade', 0]"
+2,"['King ', 'Club', 0]","['  2  ', 'Spade', 0]","['Queen', 'Heart', 0]","['Jack ', 'Diamond', 0]","['  2  ', 'Heart', 0]"
+3,"['Joker ', 'Joker', 0]","['  10 ', 'Heart', 0]","[' Ace ', 'Heart', 0]","['King ', 'Heart', 0]","['King ', 'Diamond', 0]"
+4,"['  2  ', 'Club', 0]","['Jack ', 'Club', 0]","['  10 ', 'Spade', 0]","['  10 ', 'Club', 0]","[' Ace ', 'Club', 0]"
