@@ -2,8 +2,8 @@ import pandas as pd
 import random
 
 #My file path is different for some reason, use which ever works for you
-#file_path = "spec-game/"
-file_path = ""
+#filePath = "spec-game/"
+filePath = ""
 
 #The main file should have this globally declared in the future
 #For displaying in the terminal, might be cleaner to show the symbol instead of the text for suites
@@ -15,11 +15,11 @@ JOKER = "🃏";
 #print(SPADE+HEART+CLUB+DIAMOND+JOKER);
 
 def getScorecards():
-    scorecards = pd.read_csv(file_path+"scorecards.csv")
+    scorecards = pd.read_csv(filePath+"scorecards.csv")
     return scorecards
 
 def getShowcards():
-    showcards = pd.read_csv(file_path+"showcards.csv")
+    showcards = pd.read_csv(filePath+"showcards.csv")
     return showcards
 
 #The Grid is a 5x5 dataframe.
@@ -42,7 +42,7 @@ def generateGrid(showcards):
             rowList.clear()
 
     print(grid)
-    grid.to_csv(file_path+"grid.csv")
+    grid.to_csv(filePath+"grid.csv")
             
 
 generateGrid(getShowcards())
