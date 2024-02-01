@@ -15,4 +15,8 @@ def numberOfPlayers():
         name = input(f"Enter name for Player {i + 1}: ")
         names.append(name)
 
-    return names
+    return players, names
+
+
+playerNumber, playerName = numberOfPlayers()
+print(f"The players are: {playerName}.")
