@@ -28,8 +28,8 @@ def displayGrid():
             cardList = stringToList(card)
             if(cardList[2]=="0"):
                 #row = row+"   "+cardList[0]+" "+suiteDict.get(cardList[1])
-                formatted_card = f"{cardList[0]} {suiteDict.get(cardList[1])}"
-                row += f"| {formatted_card:<3} "
+                formattedCard = f"{cardList[0]} {suiteDict.get(cardList[1])}"
+                row += f"| {formattedCard:<3} "
             else:
                 row = row+" XX "
         print(row)

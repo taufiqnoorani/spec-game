@@ -1,4 +1,4 @@
-def playerTurn(player, players, round_scores):
+def playerTurn(player, players, roundScores):
     print(f"\n{player}'s turn:")
     #display_grid()
 
