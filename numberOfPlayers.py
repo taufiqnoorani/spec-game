@@ -1,3 +1,5 @@
+import random
+
 def numberOfPlayers():
     while True:
         try:
@@ -15,8 +17,11 @@ def numberOfPlayers():
         name = input(f"Enter name for Player {i + 1}: ")
         names.append(name)
 
+    # Randomize the order of player names
+    random.shuffle(names)
+
     return players, names
 
 
 playerNumber, playerName = numberOfPlayers()
-print(f"The players are: {playerName}.")
+print(f"The players, in order of their turns are: {playerName}.")

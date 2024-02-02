@@ -1,7 +1,7 @@
 import pandas as pd
 
-file_path = "spec-game/"
-#file_path = "";
+#file_path = "spec-game/"
+file_path = "";
 
 suiteDict = {"Spade": "♠",
              "Heart": "♥",
@@ -27,10 +27,13 @@ def displayGrid():
             card = grid.iloc[r][c+1]
             cardList = stringToList(card)
             if(cardList[2]=="0"):
-                row = row+"   "+cardList[0]+" "+suiteDict.get(cardList[1])
+                #row = row+"   "+cardList[0]+" "+suiteDict.get(cardList[1])
+                formatted_card = f"{cardList[0]} {suiteDict.get(cardList[1])}"
+                row += f"| {formatted_card:<3} "
             else:
                 row = row+" XX "
         print(row)
         row=""
+        print("+------+------+------+------+------+")
 
 displayGrid()

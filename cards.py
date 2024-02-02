@@ -19,4 +19,3 @@ def createDeckDataframe():
         dictCards[key] = t
 
     return dictCards
-
