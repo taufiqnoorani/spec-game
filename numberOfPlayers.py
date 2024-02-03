@@ -6,7 +6,7 @@ def numberOfPlayers():
             players = int(
                 input("Enter the number of players playing (must be between 2 to 4): "))
             if 2 <= players <= 4:
-                break  # Break out of the loop if a valid number of players is entered
+                break  # Break out of the loop if a valid number of players is entered.
             else:
                 print("Invalid player number. Please choose a value between 2 and 4.")
         except ValueError:
@@ -17,7 +17,7 @@ def numberOfPlayers():
         name = input(f"Enter name for Player {i + 1}: ")
         names.append(name)
 
-    # Randomize the order of player names
+    # Randomize the order of player names.
     random.shuffle(names)
 
     return players, names
