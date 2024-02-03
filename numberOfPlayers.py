@@ -21,7 +21,3 @@ def numberOfPlayers():
     random.shuffle(names)
 
     return players, names
-
-
-playerNumber, playerName = numberOfPlayers()
-print(f"The players, in order of their turns are: {playerName}.")
