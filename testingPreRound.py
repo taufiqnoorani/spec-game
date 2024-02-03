@@ -8,3 +8,4 @@ if __name__ == "__main__":
     print("Predictions for Pre-Round:")
     for player, prediction in predictions.items():
         print(f"{player}: {prediction}")
+    
