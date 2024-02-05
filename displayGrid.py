@@ -46,6 +46,8 @@ def displayGrid():
         row=""
         print("+------+------+------+------+------+")
 
+#[['Ace', 'Spade', '0'], ['10', 'Diamond', '0'], ['Queen', 'Diamond', '0'], ['Queen', 'Spade', '0'], ['2', 'Diamond', '0'], ['Jack', 'Heart', '0'], ['Queen', 'Club', '0'], ['Jack', 'Spade', '0'], ['Ace', 'Diamond', '0'], ['King', 'Spade', '0'], ['King', 'Club', '0'], ['2', 'Spade', '0'], ['Queen', 'Heart', '0'], ['Jack', 'Diamond', '0'], ['2', 'Heart', '0'], ['Joker', 'Joker', '0'], ['10', 'Heart', '0'], ['Ace', 'Heart', '0'], ['King', 'Heart', '0'], ['King', 'Diamond', '0'], ['2', 'Club', '0'], ['Jack', 'Club', '0'], ['10', 'Spade', '0'], ['10', 'Club', '0'], ['Ace', 'Club', '0']]
+
 #TODO: please display this in main and test in main file, becuase when i call this file it displayes uneccesarry data
 #TODO: create a separate method just to display becuase i need to call this method everytime i need updated grid, so separate the logic and display part
 displayGrid()

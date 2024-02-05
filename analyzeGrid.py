@@ -7,8 +7,11 @@ def analyze_grid(grid):
             un_flipped += 1
 
     if flipped is 1:
-        return "There is only 1 card left to predict"
+        return True
     else:
-        return f"There are {un_flipped} cards left un-flipped"
+        return False
 
-# TODO: end of turn logic?  award showcards? check predictions?
+#TODO: end of turn logic?  award showcards? check predictions?
+
+def endofturnlogic(player_names,current_player):
+    print("")
