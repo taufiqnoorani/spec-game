@@ -1,21 +1,41 @@
 import pandas as pd
+import random
+import pandas as pd
+import random
 
-def createDeckDataframe():
-    ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
-    suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
-    jokers = ['Joker', 'Joker', 'Joker']
+filePath = ""
 
-    # Create a list of tuples representing all cards in the deck
-    cards = [(rank, suit) for rank in ranks for suit in suits]
-    cards.extend([(joker, 'Joker') for joker in jokers])
+def scorecards():
+            # Read the CSV data into a DataFrame
+            scorecardsDf = pd.read_csv(filePath+"scorecards.csv")
 
-    # Create a DataFrame from the list of tuples
-    deckDf = pd.DataFrame(cards, columns=['Rank', 'Suit'])
+            # Sort the DataFrame in descending order by 'Points'
+            scorecardsDf = scorecardsDf.sort_values('Points', ascending=False)
 
-    #TODO: need to assign unique id to each card
-    dictCards = {}
-    for t in cards:
-        key = len(dictCards)
-        dictCards[key] = t
+            # Convert the DataFrame to a list of lists, reorder columns and eliminate 'Position'
+            scorecards = scorecardsDf[['Points', 'Rank', 'Suite']].values.tolist()
 
-    return dictCards
+            return scorecards
+
+
+def showcards():
+    # Read the CSV data into a DataFrame
+    showcardsDf = pd.read_csv(filePath+"showcards.csv")
+
+    # Strip leading/trailing spaces from 'Rank' and 'Suite'
+    showcardsDf['Rank'] = showcardsDf['Rank'].str.strip()
+    showcardsDf['Suite'] = showcardsDf['Suite'].str.strip()
+
+    # Convert the DataFrame to a list of lists, reorder columns
+    showcards = showcardsDf[['Rank', 'Suite']].values.tolist()
+
+    # Shuffle the list
+    random.shuffle(showcards)
+
+    return showcards
+
+scorecardsP = scorecards()
+print(f"This is {scorecardsP}")
+print("This is a break between the scorecards and the showcards\n\n\n\n\n\n\n")
+showcardsP = showcards()
+print(f"This is {showcardsP}")
