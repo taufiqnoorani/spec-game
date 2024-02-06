@@ -32,6 +32,9 @@ def showcards():
     # Shuffle the list
     random.shuffle(showcards)
 
+    # Add 'Position' at index 0
+    showcards = [[str(i+1)] + card for i, card in enumerate(showcards)]
+
     return showcards
 
 scorecardsP = scorecards()
