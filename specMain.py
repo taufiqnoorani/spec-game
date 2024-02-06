@@ -1,4 +1,4 @@
-from analyzeGrid import analyze_grid
+from analyseGrid import analyse_grid
 from displayGrid import return_stateful_list
 from validateCallout import validate_callouts
 from cards import createDeckDataframe
@@ -26,7 +26,7 @@ check_callout = validate_callouts(['Ace', 'Spade', '0'])
 print(check_callout)
 
 #analyze grid if theres a last card left
-check_grid = analyze_grid(return_stateful_list())  #theres a logic clash in this, DISCUSS over scrum
+check_grid = analyse_grid(return_stateful_list())  #theres a logic clash in this, DISCUSS over scrum
 print(check_grid)
 
 #TODO: where are playerwise scorecards stored that they won with every correct prediction??
