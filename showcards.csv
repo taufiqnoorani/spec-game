@@ -1,26 +1,26 @@
 ﻿Rank,Suite
- Ace ,Spade
- Ace ,Heart
- Ace ,Club
- Ace ,Diamond
-  2  ,Spade
-  2  ,Heart
-  2  ,Club
-  2  ,Diamond
-  10 ,Spade
-  10 ,Heart
-  10 ,Club
-  10 ,Diamond
-Jack ,Spade
-Jack ,Heart
-Jack ,Club
-Jack ,Diamond
+Ace,Spade
+Ace,Heart
+Ace,Club
+Ace,Diamond
+Joker,Spade
+Joker,Heart
+Joker,Club
+Joker,Diamond
+10,Spade
+10,Heart
+10,Club
+10,Diamond
+Jack,Spade
+Jack,Heart
+Jack,Club
+Jack,Diamond
 Queen,Spade
 Queen,Heart
 Queen,Club
 Queen,Diamond
-King ,Spade
-King ,Heart
-King ,Club
-King ,Diamond
-Joker ,Joker
+King,Spade
+King,Heart
+King,Club
+King,Diamond
+Joker,Joker
