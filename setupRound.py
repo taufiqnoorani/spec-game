@@ -30,14 +30,14 @@ def getScorecards():
 
 ##############  USE THIS TO GET A GRID LIST   ##############
 #Returns a randomized list of list containing all the showcards
-#[[1, Rank, Suite], [2, Rank, Suite], [3, Rank, Suite] ... [25, Rank, Suite]]
+#[[1, Rank, Suite, 0], [2, Rank, Suite, 0], [3, Rank, Suite, 0] ... [25, Rank, Suite, 0]]
 def getShowcards():
     showcardList = []
     randomList = random.sample(range(0,25),25)
     showcards = pd.read_csv(filePath+"showcards.csv")
     i = 1
     for r in randomList:
-        sc = [str(i), str(showcards.iloc[r].Rank), str(showcards.iloc[r].Suite)]
+        sc = [str(i), str(showcards.iloc[r].Rank), str(showcards.iloc[r].Suite), "0"]
         showcardList.append(sc)
         i+=1
     return showcardList
