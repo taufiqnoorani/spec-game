@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿Rank,Suite
+=======
+Rank,Suite
+>>>>>>> bba7ac22c4932c576e19b398669790e0f3665150
 Ace,Spade
 Ace,Heart
 Ace,Club
@@ -23,4 +27,8 @@ King,Spade
 King,Heart
 King,Club
 King,Diamond
+<<<<<<< HEAD
 Joker,Joker
+=======
+Joker,Joker
+>>>>>>> bba7ac22c4932c576e19b398669790e0f3665150

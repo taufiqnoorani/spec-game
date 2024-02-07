@@ -1,4 +1,4 @@
-def analyze_grid(grid):
+def analyse_grid(grid):
     flipped, un_flipped = 0,0
     for sub_list in grid:
         if sub_list[2] is '1':
@@ -15,3 +15,6 @@ def analyze_grid(grid):
 
 def endofturnlogic(player_names,current_player):
     print("")
+
+def updatedGrid():
+    return updatedGrid
