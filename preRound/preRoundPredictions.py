@@ -3,7 +3,7 @@ from numberOfPlayers import numberOfPlayers
 
 file_path = ""
 
-def preRoundPredictions(players, names):
+def preRoundPredictions(names):
    # Displaying the rules.
    print("Rules for Pre-Round Predictions:\nPredictions are made by each player, in turn, nominating the Ace, King, Queen, Jack, or Ten of a specific suit, or by announcing ""Joker"" without mentioning a suit.\n No two players may predict the same suit or the same rank or a Joker.")
    print("You can choose ranks from Ace(A), King(K), Queen(Q), Jack(J),Ten(T)")

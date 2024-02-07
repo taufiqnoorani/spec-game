@@ -1,7 +1,7 @@
 def analyse_grid(grid):
     flipped, un_flipped = 0,0
     for sub_list in grid:
-        if sub_list[2] is '1':
+        if sub_list[3] is '1':
             flipped += 1
         else:
             un_flipped += 1

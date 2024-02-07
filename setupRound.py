@@ -70,7 +70,3 @@ def generateGrid(showcards):
 
     #print(grid)
     grid.to_csv(filePath+"grid.csv")
-<<<<<<< HEAD
-=======
-            
->>>>>>> bba7ac22c4932c576e19b398669790e0f3665150
