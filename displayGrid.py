@@ -45,7 +45,7 @@ def displayGridList(showCards):
         for c in range(0,5):
             cardList = showCards[i]
             i+=1
-            if(cardList[3]=="0"):
+            if(cardList[3]=="1"):
                 #formattedCard = f"{cardList[1]} {suiteDict.get(cardList[2])}"  
                 #row += f"| {formattedCard:<3} "
                 cardStr = str(cardList[1]).rjust(6,' ') + " " + suiteDict.get(cardList[2])
@@ -65,5 +65,3 @@ def displayGridList(showCards):
         rownum=""
         #print("+----------+----------+----------+----------+----------+")
     print()
-
-displayGridList(getShowcards())
