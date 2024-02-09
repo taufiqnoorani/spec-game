@@ -1,14 +1,16 @@
 import pandas as pd
+from setupRound import getShowcards
+import textwrap
 
 full_grid_list = []
 
 #file_path = "spec-game/"
 file_path = "";
 
-suiteDict = {"Spade": "♠",
-             "Heart": "♥",
-             "Club": "♣",
-             "Diamond": "♦",
+suiteDict = {"Spades": "♠",
+             "Hearts": "♥",
+             "Clubs": "♣",
+             "Diamonds": "♦",
              "Joker": "🃏"}
 
 #This method converts a string "['1', '2', '3', ...]" to a list ['1,'2','3']
@@ -22,36 +24,46 @@ def stringToList(cell):
     return list(cell.split(","))
 
 
-def displayGrid():
-    grid = pd.read_csv(file_path+"grid.csv")
-    row = ""
-    global full_grid_list
-    for r in range(0,5):
-        for c in range(0,5):
-            card = grid.iloc[r][c+1]
-            cardList = stringToList(card)
-
-            #grid data in a list to use in every round, this data will be used to analyze the grid changes
-            full_grid = grid.iloc[r][c + 1]
-            full_grid_list .append(stringToList(full_grid))
-
-            #print(full_grid_list)
-            if(cardList[2]=="0"):
-                #row = row+"   "+cardList[0]+" "+suiteDict.get(cardList[1])
-                formattedCard = f"{cardList[0]} {suiteDict.get(cardList[1])}"
-                row += f"| {formattedCard:<3} "
-            else:
-                row = row+" XX "
-        print(row)
-        row=""
-        print("+------+------+------+------+------+")
-
 #[['Ace', 'Spade', '0'], ['10', 'Diamond', '0'], ['Queen', 'Diamond', '0'], ['Queen', 'Spade', '0'], ['2', 'Diamond', '0'], ['Jack', 'Heart', '0'], ['Queen', 'Club', '0'], ['Jack', 'Spade', '0'], ['Ace', 'Diamond', '0'], ['King', 'Spade', '0'], ['King', 'Club', '0'], ['2', 'Spade', '0'], ['Queen', 'Heart', '0'], ['Jack', 'Diamond', '0'], ['2', 'Heart', '0'], ['Joker', 'Joker', '0'], ['10', 'Heart', '0'], ['Ace', 'Heart', '0'], ['King', 'Heart', '0'], ['King', 'Diamond', '0'], ['2', 'Club', '0'], ['Jack', 'Club', '0'], ['10', 'Spade', '0'], ['10', 'Club', '0'], ['Ace', 'Club', '0']]
 
 #TODO: please display this in main and test in main file, becuase when i call this file it displayes uneccesarry data
 #TODO: create a separate method just to display becuase i need to call this method everytime i need updated grid, so separate the logic and display part
-displayGrid()
 
 #sending the grid in list format
 def return_stateful_list():
     return full_grid_list
+
+
+#Display grid from a list of list
+#Call this after every turn
+def displayGridList(showCards):
+    i = 0
+    print()
+    for r in range(0,5):
+        row = ""
+        rownum = ""
+        for c in range(0,5):
+            cardList = showCards[i]
+            i+=1
+            if(cardList[3]=="0"):
+                #formattedCard = f"{cardList[1]} {suiteDict.get(cardList[2])}"  
+                #row += f"| {formattedCard:<3} "
+                cardStr = str(cardList[1]).rjust(6,' ') + " " + suiteDict.get(cardList[2])
+                #row += cardStr.center(10,' ')
+                row += cardStr.ljust(10,' ')
+                
+                
+            else:
+                row = row+"XX".center(10,' ')
+            numstr = str(cardList[0]).center(10,' ')
+            rownum += numstr.center(10,' ')
+        print(row)
+        print(rownum)
+        print()
+        print()
+        row=""
+        rownum=""
+        #print("+----------+----------+----------+----------+----------+")
+    print()
+
+displayGridList(getShowcards())
