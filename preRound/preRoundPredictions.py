@@ -5,10 +5,10 @@ file_path = ""
 
 def preRoundPredictions(names):
    # Displaying the rules.
-   print("Rules for Pre-Round Predictions:\nPredictions are made by each player, in turn, nominating the Ace, King, Queen, Jack, or Ten of a specific suit, or by announcing ""Joker"" without mentioning a suit.\n No two players may predict the same suit or the same rank or a Joker.")
-   print("You can choose ranks from Ace(A), King(K), Queen(Q), Jack(J),Ten(T)")
-   print("You can choose suits from Spade(S), Heart(H), Club(C), Diamond(D)")
-   
+   print("Rules for Pre-Round Predictions:\nPredictions are made by each player, in turn, nominating the Ace, King, Queen, Jack, or Ten of a specific suit, or by announcing ""Joker"" without mentioning a suit.\nNo two players may predict the same suit or the same rank or a Joker.")
+   print("Ranks to guess from: ACE(A), KING(K), QUEEN(Q), JACK(J), 10(10), JOKER(JOKER)")
+   print("Suites to guess from: HEARTS(H), DIAMONDS(D), CLUBS(C), SPADES(S)")
+   print("The guess format is:Q,H (for Queen of Hearts.)")
    # Saving the pre-round predictions.
    predictions = {}
    # Defining sets to keep track of predicted ranks and suits.
@@ -41,6 +41,6 @@ def preRoundPredictions(names):
                     else:
                         print("Another player has already predicted this rank. Please choose another prediction.")
                 else:
-                    print("Invalid rank or suit. Please choose from 'A', 'K', 'Q', 'J', 'T' for rank and 'S', 'H', 'C', 'D' for suit.")
+                    print("Invalid rank or suit. Please choose from 'A', 'K', 'Q', 'J', '10' for rank and 'S', 'H', 'C', 'D' for suit.")
    
    return predictions
