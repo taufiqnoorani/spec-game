@@ -20,6 +20,10 @@ print(f"The players, in order of their turns are: {namePlayers}.")
 predictions = preRoundPredictions.preRoundPredictions(namePlayers)
 
 displayGridList(showcards)
+print(predictions)
+
+for namePlayers in numPlayers:
+
 
 #validate player callout by sending user input
 #check_callout = validate_callouts(['Ace', 'Spade', '0'])

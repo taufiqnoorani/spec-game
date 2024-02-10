@@ -6,7 +6,6 @@ def validate_callouts(user_input):
 
     #TODO: check against previous player guesses if any
 
-    print("\n" * 100)
     _list = return_stateful_list()
     print(_list)
     for sub_list in _list:
