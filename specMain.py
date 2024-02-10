@@ -7,6 +7,8 @@ from setupRound import getShowcards
 from setupRound import getScorecards
 from displayGrid import displayGridList
 from preRound import preRoundPredictions
+from analyseGrid import analyse_grid
+from playTurn.updatedGrid import updatedGrid
 
 # Asking number of players and their names.
 numPlayers, namePlayers = numberOfPlayers()
@@ -28,7 +30,13 @@ for rounds in namePlayers:
     # print(predictions)
     print(namePlayers)
     i = 0
-    for x in range(0, 25):
+    while True:
+        #print(showcards)
+        #Loop until there is only one card left
+        if analyse_grid(showcards) is True:
+            print("Only One card left")
+            break
+
         print(i)
         print(namePlayers[i])
         player_guess, player = guess(namePlayers[i], showcards)
@@ -38,6 +46,10 @@ for rounds in namePlayers:
 
         print(player_guess)
         print(player)
+        showcards =updatedGrid(showcards, player_guess)
+        print(showcards)
+        displayGridList(showcards)
+
 
 # validate player callout by sending user input
 # check_callout = validate_callouts(['Ace', 'Spade', '0'])
