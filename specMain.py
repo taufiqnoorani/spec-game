@@ -2,12 +2,14 @@
 # from displayGrid import return_stateful_list
 # from validateCallout import validate_callouts
 from numberOfPlayers import numberOfPlayers
+from playTurn.addingScores import addingScores
 from playTurn.guess import guess
 from setupRound import getShowcards
+from setupRound import populate_playerScoreDict
 from setupRound import getScorecards
 from displayGrid import displayGridList
 from preRound import preRoundPredictions
-from analyseGrid import analyse_grid
+from analyseGrid import analyse_grid, assign_scorecards
 from playTurn.updatedGrid import updatedGrid
 
 # Asking number of players and their names.
@@ -22,13 +24,18 @@ print(f"The players, in order of their turns are: {namePlayers}.")
 
 for rounds in namePlayers:
 
+    # save player sccore
+    player_scores = populate_playerScoreDict(namePlayers)
+
     showcards = getShowcards()
     scorecards = getScorecards()
     predictions = preRoundPredictions.preRoundPredictions(namePlayers)
 
+    print(predictions)
+
     displayGridList(showcards)
     # print(predictions)
-    print(namePlayers)
+    #print(namePlayers)
     i = 0
     while True:
         #print(showcards)
@@ -36,20 +43,28 @@ for rounds in namePlayers:
         if analyse_grid(showcards) is True:
             print("Only One card left")
             break
-
-        print(i)
-        print(namePlayers[i])
+        # player guess one by one
         player_guess, player = guess(namePlayers[i], showcards)
+
+
+        print(player_guess)
+
+        #player guessed card revealed on grid
+        showcards, card_matched_in_grid = updatedGrid(showcards, player_guess)
+        print(showcards)
+        displayGridList(showcards) #displays the main grid
+
+        #assign player scorecards with respect to correct guesses
+
+        score, msg = addingScores(card_matched_in_grid , player_guess)
+        print()
+        player_scores = assign_scorecards(player_scores, scorecards, score, namePlayers[i])
+        print("Score: ")
+        print(player_scores)
+
         i += 1
         if i == numPlayers:
             i = 0
-
-        print(player_guess)
-        print(player)
-        showcards =updatedGrid(showcards, player_guess)
-        print(showcards)
-        displayGridList(showcards)
-
 
 # validate player callout by sending user input
 # check_callout = validate_callouts(['Ace', 'Spade', '0'])

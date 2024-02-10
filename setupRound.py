@@ -70,3 +70,9 @@ def generateGrid(showcards):
 
     #print(grid)
     grid.to_csv(filePath+"grid.csv")
+
+def populate_playerScoreDict(players):
+    player_scores = {}
+    for x in players:
+        player_scores[x] = []
+    return player_scores
