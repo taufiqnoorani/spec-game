@@ -2,37 +2,47 @@
 # from displayGrid import return_stateful_list
 # from validateCallout import validate_callouts
 from numberOfPlayers import numberOfPlayers
+from playTurn.guess import guess
 from setupRound import getShowcards
 from setupRound import getScorecards
 from displayGrid import displayGridList
 from preRound import preRoundPredictions
 
-# Asking number of players and their names. 
+# Asking number of players and their names.
 numPlayers, namePlayers = numberOfPlayers()
 print(f"You've chosen {numPlayers} players.")
 
-showcards = getShowcards()
-scorecards = getScorecards()
-
-#Displaying the player order.
+# Displaying the player order.
 print(f"The players, in order of their turns are: {namePlayers}.")
 
-predictions = preRoundPredictions.preRoundPredictions(namePlayers)
+# number of rounds played
+# for rounds in numPlayers:
 
-displayGridList(showcards)
-print(predictions)
+for rounds in namePlayers:
 
-for namePlayers in numPlayers:
+    showcards = getShowcards()
+    scorecards = getScorecards()
+    predictions = preRoundPredictions.preRoundPredictions(namePlayers)
 
+    displayGridList(showcards)
+    # print(predictions)
+    print(namePlayers)
+    i = 0
+    for x in range(0, 25):
+        print(i)
+        print(namePlayers[i])
+        player_guess, player = guess(namePlayers[i], showcards)
+        i += 1
+        if i == numPlayers:
+            i = 0
 
-#validate player callout by sending user input
-#check_callout = validate_callouts(['Ace', 'Spade', '0'])
-#print(check_callout)
+        print(player_guess)
+        print(player)
 
-#analyze grid if theres a last card left
-#check_grid = analyse_grid(return_stateful_list())  #theres a logic clash in this, DISCUSS over scrum
-#print(check_grid)
+# validate player callout by sending user input
+# check_callout = validate_callouts(['Ace', 'Spade', '0'])
+# print(check_callout)
 
-#TODO: where are playerwise scorecards stored that they won with every correct prediction??
-#TODO: the card data syntax doesnt match between taufiq and manan, and wheres the pre_round predictions stored?. please coordinate and use same card storing syntax, mana us using ['ace', 'Hearts', '0'], taufiq is using ['Q','H']
-
+# analyze grid if theres a last card left
+# check_grid = analyse_grid(return_stateful_list())  #theres a logic clash in this, DISCUSS over scrum
+# print(check_grid)
