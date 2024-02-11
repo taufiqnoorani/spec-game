@@ -2,7 +2,7 @@ def addingScores(card, guess):
     score = 0
     message = ""
 
-    card[3] = '0'
+    guess[3] = '1'
 
     card[1] = card[1].upper()
     card[2] = card[2].upper()

@@ -25,20 +25,22 @@ print(f"The players, in order of their turns are: {namePlayers}.")
 for rounds in namePlayers:
 
     # save player sccore
+    global player_scores
     player_scores = populate_playerScoreDict(namePlayers)
 
     showcards = getShowcards()
     scorecards = getScorecards()
     predictions = preRoundPredictions.preRoundPredictions(namePlayers)
 
-    print(predictions)
+
 
     displayGridList(showcards)
-    # print(predictions)
-    #print(namePlayers)
+
     i = 0
     while True:
-        #print(showcards)
+        print("showcards before updating \n")
+        print(showcards)
+
         #Loop until there is only one card left
         if analyse_grid(showcards) is True:
             print("Only One card left")
@@ -46,19 +48,23 @@ for rounds in namePlayers:
         # player guess one by one
         player_guess, player = guess(namePlayers[i], showcards)
 
-
         print(player_guess)
 
         #player guessed card revealed on grid
         showcards, card_matched_in_grid = updatedGrid(showcards, player_guess)
-        print(showcards)
+
         displayGridList(showcards) #displays the main grid
+        print("showcards after updating \n")
+        print(showcards)
 
         #assign player scorecards with respect to correct guesses
 
         score, msg = addingScores(card_matched_in_grid , player_guess)
-        print()
         player_scores = assign_scorecards(player_scores, scorecards, score, namePlayers[i])
+
+        print("showcards after updating and pred \n")
+        print(showcards)
+
         print("Score: ")
         print(player_scores)
 
@@ -66,6 +72,7 @@ for rounds in namePlayers:
         if i == numPlayers:
             i = 0
 
+print("game ended")
 # validate player callout by sending user input
 # check_callout = validate_callouts(['Ace', 'Spade', '0'])
 # print(check_callout)

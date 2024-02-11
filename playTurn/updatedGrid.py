@@ -7,6 +7,7 @@
 #    return grid  # Return the updated grid. Store this as updatedGrid to add to other functions.
 
 def updatedGrid(grid, guess):
+    global card
     for i, card in enumerate(grid):
         if card[0] == guess[0]:  # If the position matches.
             print(f"{card[1]},{card[2]}")# Reveals the actual value of the card.
