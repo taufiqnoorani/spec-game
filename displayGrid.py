@@ -7,11 +7,11 @@ full_grid_list = []
 #file_path = "spec-game/"
 file_path = "";
 
-suiteDict = {"Spades": "♠",
-             "Hearts": "♥",
-             "Clubs": "♣",
-             "Diamonds": "♦",
-             "Joker": "🃏"}
+suiteDict = {"SPADES": "♠",
+             "HEARTS": "♥",
+             "CLUBS": "♣",
+             "DIAMONDS": "♦",
+             "JOKER": "🃏"}
 
 #This method converts a string "['1', '2', '3', ...]" to a list ['1,'2','3']
 #This is needed because fetching a cell/element of a dataframe fetches it as a string
@@ -48,7 +48,7 @@ def displayGridList(showCards):
             if(str(cardList[3])=="1"):
                 #formattedCard = f"{cardList[1]} {suiteDict.get(cardList[2])}"  
                 #row += f"| {formattedCard:<3} "
-                cardStr = str(cardList[1]).rjust(6,' ') + " " + str(suiteDict.get(cardList[2]))
+                cardStr = str(cardList[1]).rjust(6,' ') + " " + str(suiteDict.get(cardList[2].upper()))
                 #row += cardStr.center(10,' ')
                 row += cardStr.ljust(10,' ')
                 

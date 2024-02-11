@@ -11,6 +11,7 @@ from displayGrid import displayGridList
 from preRound import preRoundPredictions
 from analyseGrid import analyse_grid, assign_scorecards
 from playTurn.updatedGrid import updatedGrid
+from preRound.preRoundScoring import preRoundScoring
 
 # Asking number of players and their names.
 numPlayers, namePlayers = numberOfPlayers()
@@ -38,8 +39,8 @@ for rounds in namePlayers:
 
     i = 0
     while True:
-        print("showcards before updating \n")
-        print(showcards)
+        #print("showcards before updating \n")
+        #print(showcards)
 
         #Loop until there is only one card left
         if analyse_grid(showcards) is True:
@@ -54,16 +55,18 @@ for rounds in namePlayers:
         showcards, card_matched_in_grid = updatedGrid(showcards, player_guess)
 
         displayGridList(showcards) #displays the main grid
-        print("showcards after updating \n")
-        print(showcards)
+        #print("showcards after updating \n")
+        #print(showcards)
 
         #assign player scorecards with respect to correct guesses
 
         score, msg = addingScores(card_matched_in_grid , player_guess)
         player_scores = assign_scorecards(player_scores, scorecards, score, namePlayers[i])
+        if score > 0:
+            lastScorecardWinner = namePlayers[i]
 
-        print("showcards after updating and pred \n")
-        print(showcards)
+        #print("showcards after updating and pred \n")
+        #print(showcards)
 
         print("Score: ")
         print(player_scores)
@@ -72,6 +75,15 @@ for rounds in namePlayers:
         if i == numPlayers:
             i = 0
 
+    # Check pre round predictions
+    for card in showcards:
+        if card[3] == "0":
+            lastCard = card
+            showcards, card_matched_in_grid = updatedGrid(showcards, lastCard)
+            break
+    displayGridList(showcards)
+    bonusPlayer, bonusPoints = preRoundScoring(predictions, lastCard, lastScorecardWinner, scorecards)
+    print(f"{bonusPlayer} wins {bonusPoints} bonus points!")
 print("game ended")
 # validate player callout by sending user input
 # check_callout = validate_callouts(['Ace', 'Spade', '0'])
