@@ -17,7 +17,7 @@ def guess(names, updatedGrid):
 
     # while True:
     # Taking input from the player for their call
-    userInput = input(f"Make your call: {currentPlayer}: ")
+    userInput = input(f"Make your call {currentPlayer}: ")
 
     # Check if the user input is "Callout"
     if userInput.upper() == "CALLOUT":

@@ -1,12 +1,11 @@
 import os
 from displayGrid import return_stateful_list
 
-
-def validate_callouts(user_input):
+def validate_callouts(user_input, latest_grid):
 
     #TODO: check against previous player guesses if any
 
-    _list = return_stateful_list()
+    _list = latest_grid
     print(_list)
     for sub_list in _list:
         if sub_list == user_input:
