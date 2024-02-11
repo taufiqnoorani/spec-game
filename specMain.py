@@ -84,11 +84,9 @@ for rounds in namePlayers:
     displayGridList(showcards)
     bonusPlayer, bonusPoints = preRoundScoring(predictions, lastCard, lastScorecardWinner, scorecards)
     print(f"{bonusPlayer} wins {bonusPoints} bonus points!")
-print("game ended")
-# validate player callout by sending user input
-# check_callout = validate_callouts(['Ace', 'Spade', '0'])
-# print(check_callout)
 
-# analyze grid if theres a last card left
-# check_grid = analyse_grid(return_stateful_list())  #theres a logic clash in this, DISCUSS over scrum
-# print(check_grid)
+    #Update player order
+    namePlayers.append(namePlayers.pop(0))
+
+print("game ended")
+
