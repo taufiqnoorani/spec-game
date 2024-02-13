@@ -1,7 +1,7 @@
 import os
 from displayGrid import return_stateful_list
 
-def validate_callouts(user_input, latest_grid):
+def validate_callouts(user_input, latest_grid, last_guess):
 
     #TODO: check against previous player guesses if any
 

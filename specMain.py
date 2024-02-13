@@ -13,6 +13,9 @@ from analyseGrid import analyse_grid, assign_scorecards
 from playTurn.updatedGrid import updatedGrid
 from preRound.preRoundScoring import preRoundScoring
 
+#GLOBAL VARIABLES
+all_player_guesses = []
+
 # Asking number of players and their names.
 numPlayers, namePlayers = numberOfPlayers()
 print(f"You've chosen {numPlayers} players.")
@@ -33,8 +36,6 @@ for rounds in namePlayers:
     scorecards = getScorecards()
     predictions = preRoundPredictions.preRoundPredictions(namePlayers)
 
-
-
     displayGridList(showcards)
 
     i = 0
@@ -47,9 +48,11 @@ for rounds in namePlayers:
             print("Only One card left")
             break
         # player guess one by one
-        player_guess, player = guess(namePlayers[i], showcards)
+        player_guess, player = guess(namePlayers[i], showcards, all_player_guesses) #takes the previous player guess aswell for callout
 
-        print(player_guess)
+        all_player_guesses.append(player_guess)
+
+        print(all_player_guesses)
 
         #player guessed card revealed on grid
         showcards, card_matched_in_grid = updatedGrid(showcards, player_guess)

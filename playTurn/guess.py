@@ -2,7 +2,7 @@
 from validateCallout import validate_callouts
 
 
-def guess(names, updatedGrid):
+def guess(names, updatedGrid, all_guess):
     print("Rules for guessing:")  # Add the playing rules.
     print("Ranks to guess from: ACE(A), KING(K), QUEEN(Q), JACK(J), 10(10), JOKER(JOKER)")
     print("Suites to guess from: HEARTS(H), DIAMONDS(D), CLUBS(C), SPADES(S)")
@@ -21,7 +21,8 @@ def guess(names, updatedGrid):
 
     # Check if the user input is "Callout"
     if userInput.upper() == "CALLOUT":
-        validate_callouts()
+        last_guess = all_guess.peek(-1) #to change
+        validate_callouts("", updatedGrid,last_guess) #to be changed
     else:
         # Spliting the input into row, column, and guess
         try:
