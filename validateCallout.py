@@ -1,10 +1,8 @@
 import os
 from displayGrid import return_stateful_list
 
-
-def validate_callouts(latest_grid, all_guess, last_player):
-    # checks against previous guesses
-    players_dict = all_guess
+'''
+players_dict = all_guess
     player_name = last_player
 
     _, player_last_card_rank, player_last_card_suit, _ = players_dict[player_name][-1]
@@ -22,11 +20,36 @@ def validate_callouts(latest_grid, all_guess, last_player):
                 print(f"{player} has the same card: {rank} of {suit}")
                 return "player"
 
+'''
+
+def validate_callouts(latest_grid, all_guess, last_player):
+    # checks against previous guesses
+    players_dict = all_guess
+    player_name = last_player
+
+    # Get the list of players
+    players = list(players_dict.keys())
+
+    # Find the index of the given player
+    player_index = players.index(player_name)
+
+    # Get the index of the previous player
+    previous_player_index = (player_index - 1) % len(players)
+
+    # Compare the last cards of the given player and the previous player
+    match = players_dict[player_name][-1][1:3] == players_dict[players[previous_player_index]][-1][1:3]
+
+    # If the cards match, print the player name and the rank and suit that matched
+    if match:
+        _, rank, suit, _ = players_dict[player_name][-1]
+        print(f"{player_name}'s last card {rank} of {suit} matches with {players[previous_player_index]}'s last card.")
+        return "player"
+
     # checks in the grid
     _list = latest_grid
     #print(_list)
     for sub_list in _list:
-        if sub_list[1:3] == user_input[1:3]:
+        if sub_list[1:3] == players_dict[player_name][-1][1:3]:
             if sub_list[3] is '1':
                 print(f"Valid Callout\nThe card player guessed is already flipped, the card is {sub_list}")
                 return "grid"
