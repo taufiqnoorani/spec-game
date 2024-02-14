@@ -2,12 +2,12 @@
 from validateCallout import validate_callouts
 
 
-def guess(names, updatedGrid, all_guess):
+def guess(names, updatedGrid, all_guess, last_player):
     print("Rules for guessing:")  # Add the playing rules.
     print("Ranks to guess from: ACE(A), KING(K), QUEEN(Q), JACK(J), 10(10), JOKER(JOKER)")
     print("Suites to guess from: HEARTS(H), DIAMONDS(D), CLUBS(C), SPADES(S)")
-    print(f"The guess format is: 25 Q,H (for card no. 25, Queen of Hearts.\n)")
-    print(f"The invalid callout format is: Callout\n)")
+    print(f"The guess format is: 25 Q,H (for card no. 25, Queen of Hearts)\n")
+    print(f"The invalid callout format is: callout\n")
 
     rankMap = {"A": "ACE", "K": "KING", "Q": "QUEEN", "J": "JACK", "10": "10", "JOKER": "JOKER"}
     suitMap = {"H": "HEARTS", "D": "DIAMONDS", "C": "CLUBS", "S": "SPADES", "JOKER": "JOKER"}
@@ -17,12 +17,23 @@ def guess(names, updatedGrid, all_guess):
 
     # while True:
     # Taking input from the player for their call
-    userInput = input(f"Make your call {currentPlayer}: ")
+    userInput = input(f"Make your call: Player -> {currentPlayer}: ")
 
     # Check if the user input is "Callout"
     if userInput.upper() == "CALLOUT":
-        last_guess = all_guess.peek(-1) #to change
-        validate_callouts("", updatedGrid,last_guess) #to be changed
+        while True:
+            caller_name = input(f"Enter the name of the player who called out: ")
+            if caller_name in all_guess:
+
+                if validate_callouts(updatedGrid,all_guess, last_player) is "player":
+                    return ['player', '','',''], caller_name
+                elif validate_callouts(updatedGrid,all_guess, last_player) is "grid":
+                    return ['grid', '','',''], caller_name
+                else:
+                    return ["none", '','',''], caller_name
+            else:
+                print("Invalid Player name entered \n")
+
     else:
         # Spliting the input into row, column, and guess
         try:
