@@ -36,6 +36,11 @@ def validate_callouts(latest_grid, all_guess, last_player):
     # Get the index of the previous player
     previous_player_index = (player_index - 1) % len(players)
 
+    # Check if the given player and the previous player have any cards
+    if not players_dict[player_name] or not players_dict[players[previous_player_index]]:
+        print(f"{player_name} or {players[previous_player_index]} doesn't have any guessed cards yet.")
+        return False
+
     # Compare the last cards of the given player and the previous player
     match = players_dict[player_name][-1][1:3] == players_dict[players[previous_player_index]][-1][1:3]
 
