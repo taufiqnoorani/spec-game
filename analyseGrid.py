@@ -30,7 +30,7 @@ def give_scorecards_callout(to_player, from_player, scorecards, players_dict, mo
     else:
         # Check if the specific player has any cards
         if not players_dict[from_player]:
-            print(f"Scorecards will be assigned from the Scorecard pile to: {to_player}")
+            print(f"{from_player} does not have any Scorecards yet, \nScorecards will be assigned from the Scorecard pile to: {to_player}")
             players_dict(to_player).append(scorecards.pop(-1))
             return players_dict
 
