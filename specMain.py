@@ -12,13 +12,21 @@ from preRound import preRoundPredictions
 from analyseGrid import analyse_grid, assign_scorecards, give_scorecards_callout
 from playTurn.updatedGrid import updatedGrid
 from preRound.preRoundScoring import preRoundScoring
+from endRound.endRoundScoring import endRoundScoring
+from endRound.endRoundCondition import endRoundCondition
+from endRound.endRoundLast import endRoundLast
 
 # GLOBAL VARIABLES
 all_player_guesses = {}
+#variable for game scores
+gameScores = {}
 
 # Asking number of players and their names.
 numPlayers, namePlayers = numberOfPlayers()
 print(f"You've chosen {numPlayers} players.")
+
+for name in namePlayers:
+    gameScores[name] = 0
 
 # Displaying the player order.
 print(f"The players, in order of their turns are: {namePlayers}.")
@@ -111,7 +119,13 @@ for rounds in namePlayers:
     bonusPlayer, bonusPoints = preRoundScoring(predictions, lastCard, lastScorecardWinner, scorecards)
     print(f"{bonusPlayer} wins {bonusPoints} bonus points!")
 
-    # Update player order
-    namePlayers.append(namePlayers.pop(0))
+    #Add the scores of the round to total scores of the game
+    gameScores = endRoundScoring(player_scores, bonusPlayer, bonusPoints, namePlayers, gameScores)
 
-print("game ended")
+    #Check if any player/s have reached a score of 173 or more and declare them as winners
+    winnerConditional = endRoundCondition(gameScores)
+    if winnerConditional is True:
+        break
+#Declare winners at the end of all rounds
+endRoundLast(winnerConditional, gameScores)
+print("\nGAME ENDED")
