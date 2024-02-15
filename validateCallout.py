@@ -1,6 +1,7 @@
 import os
 from displayGrid import return_stateful_list
 
+#this checks against all previous player guesses
 '''
 players_dict = all_guess
     player_name = last_player
@@ -39,7 +40,7 @@ def validate_callouts(latest_grid, all_guess, last_player):
     # Check if the given player and the previous player have any cards
     if not players_dict[player_name] or not players_dict[players[previous_player_index]]:
         print(f"{player_name} or {players[previous_player_index]} doesn't have any guessed cards yet.")
-        return False
+        return "none"
 
     # Compare the last cards of the given player and the previous player
     match = players_dict[player_name][-1][1:3] == players_dict[players[previous_player_index]][-1][1:3]
@@ -59,5 +60,5 @@ def validate_callouts(latest_grid, all_guess, last_player):
                 print(f"Valid Callout\nThe card player guessed is already flipped, the card is {sub_list}")
                 return "grid"
             else:
-                return False
+                return "none"
 

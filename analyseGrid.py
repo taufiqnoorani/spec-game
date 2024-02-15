@@ -31,7 +31,7 @@ def give_scorecards_callout(to_player, from_player, scorecards, players_dict, mo
         # Check if the specific player has any cards
         if not players_dict[from_player]:
             print(f"{from_player} does not have any Scorecards yet, \nScorecards will be assigned from the Scorecard pile to: {to_player}")
-            players_dict(to_player).append(scorecards.pop(-1))
+            players_dict[to_player].append(scorecards.pop(-1))
             return players_dict
 
         print(f"Highest scorecard will be given from {from_player} -> {to_player}")
