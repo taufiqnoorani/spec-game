@@ -48,6 +48,9 @@ def displayGridList(showCards):
             if(str(cardList[3])=="1"):
                 #formattedCard = f"{cardList[1]} {suiteDict.get(cardList[2])}"  
                 #row += f"| {formattedCard:<3} "
+                if str(cardList[1]).upper() == "JOKER":
+                       if str(cardList[2].upper()) != "JOKER":
+                            cardList[1] = '2' 
                 cardStr = str(cardList[1]).rjust(6,' ') + " " + str(suiteDict.get(cardList[2].upper()))
                 #row += cardStr.center(10,' ')
                 row += cardStr.ljust(10,' ')
