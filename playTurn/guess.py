@@ -24,13 +24,16 @@ def guess(names, updatedGrid, all_guess, last_player):
         while True:
             caller_name = input(f"Enter the name of the player who called out: ")
             if caller_name in all_guess:
-
-                if validate_callouts(updatedGrid,all_guess, last_player) is "player":
-                    return ['player', '','',''], caller_name
-                elif validate_callouts(updatedGrid,all_guess, last_player) is "grid":
-                    return ['grid', '','',''], caller_name
+                if caller_name == last_player:
+                    print("Caller cant be the same as last player \n")
+                    continue
                 else:
-                    return ["none", '','',''], caller_name
+                    if validate_callouts(updatedGrid,all_guess, last_player) is "player":
+                        return ['player', '','',''], caller_name
+                    elif validate_callouts(updatedGrid,all_guess, last_player) is "grid":
+                        return ['grid', '','',''], caller_name
+                    else:
+                        return ["none", '','',''], caller_name
             else:
                 print("Invalid Player name entered \n")
 

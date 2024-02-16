@@ -63,19 +63,19 @@ for rounds in namePlayers:
 
         # checks in case of callout
         # ----------------------------------------------------------------------------------------------------
-        if player_guess[0] is "player":
+        if player_guess[0] == "player":
             print("(guess match): award showcards to: ")
             print(player)
             player_scores = give_scorecards_callout(player, last_player, scorecards, player_scores, "player")
             print(f"All Player Scores: \n{player_scores}")
             continue
-        elif player_guess[0] is "grid":
+        elif player_guess[0] == "grid":
             print("(grid match): award showcards to ")
             print(player)
             player_scores = give_scorecards_callout(player, last_player, scorecards, player_scores, "grid")
             print(f"All Player Scores: \n{player_scores}")
             continue
-        elif player_guess[0] is "none":
+        elif player_guess[0] == "none":
             print("Wrong Callout! \n Game Continues\n")
             continue
         # ----------------------------------------------------------------------------------------------------
