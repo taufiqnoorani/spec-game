@@ -62,10 +62,10 @@ def validate_callouts(latest_grid, all_guess, last_player):
             if sub_list[3] is '1' and (sub_list[1].upper()) == "JOKER":
                 counter += 1
 
-    print(f"count of card {counter}")
+    #print(f"count of card {counter}")
     if counter is 5:
         print("All 5 Jokers are Faced up!\n")
-        return "none"
+        return "deuce"
 
     for sub_list in _list:
         if sub_list[1:3] == players_dict[player_name][-1][1:3]:
