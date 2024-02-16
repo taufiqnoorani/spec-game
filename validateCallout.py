@@ -42,6 +42,8 @@ def validate_callouts(latest_grid, all_guess, last_player):
     # print(f"count of card {counter}")
     if counter is 5:
         print("All 5 Jokers are Faced up!\n")
+    elif counter is 1:
+        return "none"
 
     # Get the list of players
     players = list(players_dict.keys())
