@@ -25,7 +25,7 @@ def give_scorecards_callout(to_player, from_player, scorecards, players_dict, mo
 
     if mode is "grid":
         print(f"Scorecards will be assigned from the Scorecard pile to: {to_player}")
-        players_dict(to_player).append(scorecards.pop(-1))
+        players_dict[to_player].append(scorecards.pop(-1))
         return players_dict
     else:
         # Check if the specific player has any cards
