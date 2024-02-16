@@ -51,7 +51,7 @@ for rounds in namePlayers:
     while True:
         # print("showcards before updating \n")
         # print(showcards)
-
+        print(showcards)
         # Loop until there is only one card left
         if analyse_grid(showcards) is True:
             print("Only One card left")
@@ -76,7 +76,7 @@ for rounds in namePlayers:
             print(f"All Player Scores: \n{player_scores}")
             continue
         elif player_guess[0] == "none":
-            print("Wrong Callout! \n Game Continues\n")
+            print("Wrong Callout! \nGame Continues\n")
             continue
         # ----------------------------------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 import os
 from displayGrid import return_stateful_list
 
-#this checks against all previous player guesses
+# this checks against all previous player guesses
 '''
 players_dict = all_guess
     player_name = last_player
@@ -22,6 +22,7 @@ players_dict = all_guess
                 return "player"
 
 '''
+
 
 def validate_callouts(latest_grid, all_guess, last_player):
     # checks against previous guesses
@@ -53,7 +54,19 @@ def validate_callouts(latest_grid, all_guess, last_player):
 
     # checks in the grid
     _list = latest_grid
-    #print(_list)
+    # print(_list)
+
+    counter = 0
+    for sub_list in _list:
+        if sub_list[1] == players_dict[player_name][-1][1]:
+            if sub_list[3] is '1' and (sub_list[1].upper()) == "JOKER":
+                counter += 1
+
+    print(f"count of card {counter}")
+    if counter is 5:
+        print("All 5 Jokers are Faced up!\n")
+        return "none"
+
     for sub_list in _list:
         if sub_list[1:3] == players_dict[player_name][-1][1:3]:
             if sub_list[3] is '1':
@@ -61,4 +74,3 @@ def validate_callouts(latest_grid, all_guess, last_player):
                 return "grid"
             else:
                 return "none"
-
