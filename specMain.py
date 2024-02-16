@@ -78,8 +78,6 @@ for rounds in namePlayers:
         elif player_guess[0] == "none":
             print("Wrong Callout! \nGame Continues\n")
             continue
-        elif player_guess[0] == "deuce":
-            continue
         # ----------------------------------------------------------------------------------------------------
 
         all_player_guesses[namePlayers[i]].append(player_guess)  # storing player guesses after every turn

@@ -29,6 +29,20 @@ def validate_callouts(latest_grid, all_guess, last_player):
     players_dict = all_guess
     player_name = last_player
 
+    # checks in the grid
+    _list = latest_grid
+    # print(_list)
+
+    counter = 0
+    for sub_list in _list:
+        if sub_list[1] == players_dict[player_name][-1][1]:
+            if sub_list[3] is '1' and (sub_list[1].upper()) == "JOKER":
+                counter += 1
+
+    # print(f"count of card {counter}")
+    if counter is 5:
+        print("All 5 Jokers are Faced up!\n")
+
     # Get the list of players
     players = list(players_dict.keys())
 
@@ -51,21 +65,6 @@ def validate_callouts(latest_grid, all_guess, last_player):
         _, rank, suit, _ = players_dict[player_name][-1]
         print(f"{player_name}'s last card {rank} of {suit} matches with {players[previous_player_index]}'s last card.")
         return "player"
-
-    # checks in the grid
-    _list = latest_grid
-    # print(_list)
-
-    counter = 0
-    for sub_list in _list:
-        if sub_list[1] == players_dict[player_name][-1][1]:
-            if sub_list[3] is '1' and (sub_list[1].upper()) == "JOKER":
-                counter += 1
-
-    #print(f"count of card {counter}")
-    if counter is 5:
-        print("All 5 Jokers are Faced up!\n")
-        return "deuce"
 
     for sub_list in _list:
         if sub_list[1:3] == players_dict[player_name][-1][1:3]:
