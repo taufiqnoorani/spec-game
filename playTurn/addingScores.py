@@ -7,9 +7,6 @@ def addingScores(card, guess):
     card[1] = card[1].upper()
     card[2] = card[2].upper()
 
-    print(card)
-    print(guess)
-
     if card[0] == guess[0]:  # If the position matches
         if card[1] == guess[1] and card[2] == guess[2]:  # If the rank and suit match
             score = 4  # Exact card guessed
