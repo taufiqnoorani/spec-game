@@ -37,7 +37,7 @@ def displayGrid():
 # Get number of players.
 def numberOfPlayers():
    clearFrame()
-   
+
    
    # Will set the value of n to the number of players.
    def setNumber(value):
@@ -64,8 +64,8 @@ def numberOfPlayers():
 # Get names of players.
 def nameOfPlayer(numberOfPlayers):
    clearFrame()
-   
-   
+
+
    # Will set the names of the players.
    def setNames():
       playerNames = []
@@ -91,13 +91,13 @@ def nameOfPlayer(numberOfPlayers):
 
 # Randomize the order of player names.
 def randomNames(playerNames):
-   
+
    random.shuffle(playerNames)
    return playerNames
 
 
 # Ask for pre-round predictions and save it.
-def preRoundPredictions(names):
+def preRoundPredictions(playerNames):
    clearFrame()
    
    ranksPredicted = set()
@@ -112,7 +112,7 @@ def preRoundPredictions(names):
          if rank in ['A', 'K', 'Q', 'J', 'T'] and suit in ['S', 'H', 'C', 'D']:
             if rank not in ranksPredicted:
                if suit not in suitsPredicted:
-                  predictions[names] = (rank, suit)
+                  predictions[playerNames] = (rank, suit)
                   ranksPredicted.add(rank)
                   suitsPredicted.add(suit)
                   return True, predictions
@@ -127,7 +127,7 @@ def preRoundPredictions(names):
    # Set the predictions.
    def setPredictions():
       predictions.clear()
-      for name, entry in zip(names, predictions):
+      for name, entry in zip(playerNames, predictions):
          if not checkPredictions(predictions):
             return predictions
          else:
@@ -137,7 +137,7 @@ def preRoundPredictions(names):
 
    global predictions 
    predictions = []
-   for name in names:
+   for name in playerNames:
       label = ttk.Label(frame, text="Make Your Prediction: " + name.get())
       label.pack(side='top', pady=5)
       entry = ttk.Entry(frame)
@@ -191,4 +191,11 @@ def endRoundLast():
 
 
 # Initialization of the game a.k.a. the specMain section.
+number = numberOfPlayers()
+names = nameOfPlayer(number)
+playerNames = randomNames(names)
+preRoundPredictions(playerNames)
+
+
+
 window.mainloop()
