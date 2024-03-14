@@ -30,8 +30,13 @@ suiteMap = {
 #Input - card, as list element of showcards [Pos, Rank, Suite, Flip?]
 #Output - card asset name
 def getCardAsset(card):
-    if card[1] == "Joker":
+    if card[3] == "0":
+        return pre + sep + "back1" + formt
+    if card[1] == "Joker" and card[2] == "Joker" and card[3] == "1":
         return pre + sep + "blank" + formt
-    return pre + sep + suiteMap[card[2]] + sep + str(rankMap[card[1]]) + formt
+    if card[1] == "Joker" and card[2] != "Joker" and card[3] == "1":
+        return pre + sep + suiteMap[card[2]] + sep + "2" + formt
+    if card [3] == '1':
+       return pre + sep + suiteMap[card[2]] + sep + str(rankMap[card[1]]) + formt
 
 

@@ -31,21 +31,35 @@ def displayCard():
     clearFrame()
     card = showcards[0]
     cardAsset = getCardAsset(card)
+    global image
     image = tk.PhotoImage(file=cardAsset)
-    button = ttk.Button(frame, image=image, command=displayGrid, text="Card", compound='top')
+    button = ttk.Button(frame, image=image, text="Card", compound='top')
     button.pack(side='top', pady=5)
+
+
+def onCardClick(event, card):
+    print("Card clicked: ", card)
+    showcards[int(card[0])-1][3] = '1'
+    displayGrid()
 
 #From the showcards, display the grid of cards
 def displayGrid():
     clearFrame()
+    global cardImage
+    cardImage = []
+    global cardList
+    cardList = []
     i = 0
     for row in range(5):
         for column in range(5):
-            card = showcards[i]
-            cardAsset = getCardAsset(card)
-            image = tk.PhotoImage(file=cardAsset)
-            label = ttk.Label(frame, image=image)
-            label.grid(row=row, column=column)
+            cardAsset = getCardAsset(showcards[i])
+            cardImage.append(tk.PhotoImage(file=cardAsset))
+            #image = tk.PhotoImage(file=cardAsset)
+            cardList.append(ttk.Label(frame, image=cardImage[i]))
+            #label = ttk.Label(frame, image=cardImage[i])
+            cardList[i].grid(row=row, column=column)
+            if showcards[i][3] == '0':
+                cardList[i].bind("<ButtonRelease>", lambda event, card=showcards[i]: onCardClick(event, card))
             i+=1
 
 
@@ -93,6 +107,6 @@ def setNoOfPlayers():
     button3 = ttk.Button(frame, text="4 Players", command = lambda: setPlayers(4))
     button3.pack(side='left', padx=5)
 
-#displayGrid()
-displayCard()
+displayGrid()
+#displayCard()
 window.mainloop()
