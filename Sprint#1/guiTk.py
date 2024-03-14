@@ -1,6 +1,8 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import messagebox
+from setupRound import getScorecards, getShowcards
+from cardMap import getCardAsset
 
 noOfplayers = 0
 
@@ -17,57 +19,44 @@ gameScores = {}
 nameEntries = []
 predictions = {}
 predictionEntries = []
+showcards = getShowcards()
+scorecards = getScorecards()
 
 
 def clearFrame():
     for widget in frame.winfo_children():
         widget.forget()
 
-def validatePredictions(prediction):
-    validRanks = ['A', 'K', 'Q', 'J', '10']
-    validSuites = ['H', 'D', 'C', 'S']
-    if prediction.upper() == 'JOKER':
-        return True
-    
-    parts = prediction.split(',')
-    if len(parts) != 2:
-        return False
-    
-    rank, suit = parts
-    if rank.upper() not in validRanks or suit.upper() not in validSuites:
-        return False
-    
-    if prediction.upper() in predictions.values():
-        return False
+def displayCard():
+    clearFrame()
+    card = showcards[0]
+    cardAsset = getCardAsset(card)
+    image = tk.PhotoImage(file=cardAsset)
+    button = ttk.Button(frame, image=image, command=displayGrid, text="Card", compound='top')
+    button.pack(side='top', pady=5)
 
-    if any(pred.split(',')[0].upper() == rank.upper() and pred.split(',')[1].upper() == suit.upper() for pred in predictions.values()):
-        return False
+#From the showcards, display the grid of cards
+def displayGrid():
+    clearFrame()
+    i = 0
+    for row in range(5):
+        for column in range(5):
+            card = showcards[i]
+            cardAsset = getCardAsset(card)
+            image = tk.PhotoImage(file=cardAsset)
+            label = ttk.Label(frame, image=image)
+            label.grid(row=row, column=column)
+            i+=1
 
-    return True
 
-
-def setPredictions():
-    predictions.clear()
-    for name, entry in zip(nameEntries, predictionEntries):
-        if not validatePredictions(entry.get().upper()):
-            messagebox.showerror("Invalid Prediction", "Invalid Prediction: " + entry.get() + " by " + name.get() + ". Please try again.")
-            return
-        predictions[name.get()] = entry.get().upper()
-    print(predictions)
-
+#Ask each player in order, what their predictions are for the round
+#Each player can select a card from the showcards to predict
+#The players can select the cards from a 5x5 grid
 def preRoundPredictions():
     clearFrame()
-    for name in nameEntries:
-        label = ttk.Label(frame, text="Make Your Prediction: " + name.get())
-        label.pack(side='top', pady=5)
-        entry = ttk.Entry(frame)
-        entry.pack(side='top', pady=5)
-        predictionEntries.append(entry)
     
-    preRule = ttk.Label(frame, text="Rules for Pre-Round Predictions:\n\nNominate the Ace, King, Queen, Jack, or Ten of a specific suit, or by typing ""Joker"" without mentioning a suit.\n\nNo two players may predict the same suit or the same rank or a Joker.\n\nRanks to guess from: ACE(A), KING(K), QUEEN(Q), JACK(J), 10(10), JOKER(JOKER)\nSuites to guess from: HEARTS(H), DIAMONDS(D), CLUBS(C), SPADES(S)\n\nThe guess format is:Q,H (for Queen of Hearts.)")
-    preRule.pack(side='top', pady=5)
-    confirmButton = ttk.Button(frame, text="Confirm", command = setPredictions)
-    confirmButton.pack(side='bottom', pady=5)
+
+    
 
 def setNames():
     #nameEntries.shuffle()
@@ -104,5 +93,6 @@ def setNoOfPlayers():
     button3 = ttk.Button(frame, text="4 Players", command = lambda: setPlayers(4))
     button3.pack(side='left', padx=5)
 
-setNoOfPlayers()
+#displayGrid()
+displayCard()
 window.mainloop()

@@ -3,7 +3,7 @@ import random
 
 #My file path is different for some reason, use which ever works for you
 #filePath = "spec-game/"
-filePath = ""
+filePath = "Sprint#1/"
 
 #The main file should have this globally declared in the future
 #For displaying in the terminal, might be cleaner to show the symbol instead of the text for suites
