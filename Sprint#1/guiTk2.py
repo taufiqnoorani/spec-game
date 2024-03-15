@@ -16,8 +16,11 @@ window = tk.Tk()
 window.title("Spec")
 window.geometry('1280x800')
 
+
 frame = ttk.Frame(window)
 frame.place(relx=0.5, rely=0.5, anchor='center')
+
+
 
 noOfPlayers = 0
 
@@ -43,6 +46,14 @@ cardList = []
 #A global list of all the PhotoImages
 #Appending all PhotoImages to this list will prevent the garbage collector from deleting them
 cardImage = []
+
+#A global variable for scorecard deck
+scoreCardDeck = tk.PhotoImage(file=filePath+"images/cards/card-back2.png")
+
+#A global variable for player scorecard deck
+playerScoreCardDeck = tk.PhotoImage(file=filePath+"images/cards/card-back3.png")
+
+#The player who makes the callout
 
 predictions = {}
 
@@ -112,25 +123,60 @@ def runRound():
                     #label = ttk.Label(frame, image=cardImage[i])
                     cardList[cardI].grid(row=row, column=column)
                     cardI+=1
+            scoreLabel = ttk.Label(frame, text = "Final scores")
+            scoreLabel.grid(row=5, column=1, columnspan=5)
+            
 
         #Callout button
         def onClickCallout():
+            callee = ""
+
             if len(previousGuess) <= 1:
                 print("Callout not possible")
                 messagebox.showinfo("Wrong Callout", "Callout not possible")
             elif previousGuess[-1][1] == previousGuess[-2][1] and previousGuess[-1][2] == previousGuess[-2][2]:
-                print("Player: " + currentPlayer + " called out player: " + previousGuess[-1][0])
+
+                calloutWindow = tk.Tk()
+                calloutWindow.title("Callout")
+                calloutWindow.geometry('300x200')
+                calloutFrame = ttk.Frame(calloutWindow)
+                calloutFrame.place(relx=0.5, rely=0.5, anchor='center')
+                label1 = ttk.Label(calloutFrame, text= previousGuess[-1][0] + " has been called out")
+                label1.pack(side = "top", pady=5)
+                label2 = ttk.Label(calloutFrame, text= "for their guess: "+previousGuess[-1][1]+","+previousGuess[-1][2])
+                label2.pack(side = "top", pady=5)
+                label3 = ttk.Label(calloutFrame, text= "Who made the callout?")
+                label3.pack(side = "top", pady=5)
+                global calloutList
+                calloutList = []
+                for names in playerNames:
+                    if names != previousGuess[-1][0]:
+                        calloutList.append(names)
+            
+                calloutCombo = ttk.Combobox(calloutFrame, values=calloutList)
+                calloutCombo.pack(side = "top", pady=5)
+                calloutCombo.current(0)
+
+                def setCalleeDel(callee1):
+                    callee = callee1
+                    if playerScorecards[previousGuess[-1][0]] != []:
+                        playerScorecards[callee].append(playerScorecards[previousGuess[-1][0]].pop(-1))
+                        messagebox.showinfo("Correct Callout", ""+callee+" was awarded the top scorecard of "+previousGuess[-1][0])
+                    elif scorecards != []:
+                        playerScorecards[callee].append(scorecards.pop(-1))
+                        messagebox.showinfo("Correct Callout", ""+callee+" was awarded the top scorecard from the pile")
+                    calloutWindow.destroy()
+
+                calloutConfirmButton = ttk.Button(calloutFrame, text="Confirm", command=lambda: setCalleeDel(calloutCombo.get()))
+                calloutConfirmButton.pack(side = "top", pady=5)
+
+                print("Player: " + callee + " called out player: " + previousGuess[-1][0])
                 print("Guess: ", previousGuess[-1][1]+"," +previousGuess[-1][2])
                 
-                if playerScorecards[previousGuess[-1][0]] != []:
-                    playerScorecards[currentPlayer].append(playerScorecards[previousGuess[-1][0]].pop(-1))
-                    messagebox.showinfo("Correct Callout", ""+currentPlayer+" was awarded the top scorecard of "+previousGuess[-1][0])
-                elif scorecards != []:
-                    playerScorecards[currentPlayer].append(scorecards.pop(-1))
-                    messagebox.showinfo("Correct Callout", ""+currentPlayer+" was awarded the top scorecard from the pile")
+                
             else:
                 print("Wrong callout")
-                messagebox.showinfo("Wrong Callout", "The callout was wrong")
+                messagebox.showinfo("Invalid Callout", "Nothing to callout")
                 
 
         #Assign scores to the players
@@ -147,6 +193,7 @@ def runRound():
             if tempScore > 0:
                 lastPlayerScored = currentPlayer
             #print(playerScorecards)
+            showcards[int(card[0])-1][3] = '1' #Flip the card
             if i < noOfPlayers-1:
                 displayGrid(i+1)
             else:
@@ -155,7 +202,6 @@ def runRound():
 
         #This method will handle the click event for the score card and provide the player with a drop down menu to select the card
         def onCardClick(event, card):
-            showcards[int(card[0])-1][3] = '1' #Flip the card
             if event == "last":
                 c = []
                 c[0] =""
@@ -189,6 +235,8 @@ def runRound():
 
             confirmButton = ttk.Button(selFrame, text="Confirm", command=onClickAssign)
             confirmButton.pack(side = "top", pady=5)
+            selWindow.wm_attributes("-topmost", 1)
+            selWindow.focus_force()
             selWindow.mainloop()
         
 
@@ -210,6 +258,18 @@ def runRound():
                     messagebox.showinfo("Last Card Left", "Click to reveal last card")
                     onCardClick("last", showcards[cardI])
                 cardI+=1
+        
+        scDeckLabel = ttk.Label(frame, text = "Scorecards in Deck "+ str(len(scorecards)))
+        scDeckLabel.grid(row=0, column=5, rowspan=1, padx=2, pady=2)
+
+        scoreCardDecklabel = ttk.Label(frame, image=scoreCardDeck)
+        scoreCardDecklabel.grid(row=1, column=5, rowspan=1, padx=2, pady=2)
+
+        playerScoreCardImageLabel = ttk.Label(frame, image=playerScoreCardDeck)
+        playerScoreCardImageLabel.grid(row=3, column=5, rowspan=1, padx=2, pady=2)
+
+        playerScoreCardLabel = ttk.Label(frame, text = "Scorecards in "+currentPlayer+"'s deck "+ str(len(playerScorecards[currentPlayer])))
+        playerScoreCardLabel.grid(row=4, column=5, rowspan=1, padx=2, pady=2)
 
         turnLabel = ttk.Label(frame, text = "Current Player: " + currentPlayer)
         turnLabel.grid(row=5, column=0, columnspan=5)
