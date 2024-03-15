@@ -9,6 +9,7 @@ from analyseGrid import assign_scorecards
 from guiAddingScores import addingScoresGUI
 from preRound.preRoundScoring import preRoundScoring
 from endRound.endRoundScoring import endRoundScoring
+import random
 
 filePath = "Sprint#1/"
 
@@ -59,6 +60,8 @@ predictions = {}
 
 #[['player', 'rank', 'suite']]
 previousGuess = []
+
+roundsPlayed = 0
 
 lastPlayerScored = ""
 
@@ -113,19 +116,42 @@ def runRound():
             cardList = []
             global cardImage
             cardImage = []
+            l = 0
             for row in range(5):
                 for column in range(5):
-                    showcards[cardI][3] = '1'
-                    cardAsset = getCardAsset(showcards[cardI])
+                    showcards[l][3] = '1'
+                    cardAsset = getCardAsset(showcards[l])
                     cardImage.append(tk.PhotoImage(file=cardAsset))
                     #image = tk.PhotoImage(file=cardAsset)
-                    cardList.append(ttk.Label(frame, image=cardImage[cardI]))
+                    cardList.append(ttk.Label(frame, image=cardImage[l]))
                     #label = ttk.Label(frame, image=cardImage[i])
-                    cardList[cardI].grid(row=row, column=column)
-                    cardI+=1
+                    cardList[l].grid(row=row, column=column)
+                    l+=1
             scoreLabel = ttk.Label(frame, text = "Final scores")
             scoreLabel.grid(row=5, column=1, columnspan=5)
+            runRound()
             
+        #Last card left
+        if(analyse_grid(showcards) == True):
+            print("Last card left")
+            messagebox.showinfo("Last Card Left", "Click to reveal last card")
+            for cards in showcards:
+                if cards[3] == '0':
+                    card = cards
+            c = [0,0,0]
+            c[0] =""
+            c[1] = card[0]
+            c[2] = card[1]
+            print(predictions)
+            print(c)
+            print(lastPlayerScored)
+            print(playerScorecards)
+            bonusplayer, bonuspoints = preRoundScoring(predictions,c,lastPlayerScored,scorecards)
+            messagebox.showinfo("Last card winner, "+bonusplayer+" was awarded "+str(bonuspoints)+" bonus points")
+
+            gameScores = endRoundScoring(playerScorecards, bonusplayer, bonuspoints, playerNames, gameScores)
+            displayLastGrid()
+            print(gameScores)
 
         #Callout button
         def onClickCallout():
@@ -191,6 +217,7 @@ def runRound():
             #print(tempScore)
             playerScorecards = assign_scorecards(playerScorecards, scorecards, tempScore, currentPlayer)
             if tempScore > 0:
+                global lastPlayerScored
                 lastPlayerScored = currentPlayer
             #print(playerScorecards)
             showcards[int(card[0])-1][3] = '1' #Flip the card
@@ -202,19 +229,23 @@ def runRound():
 
         #This method will handle the click event for the score card and provide the player with a drop down menu to select the card
         def onCardClick(event, card):
-            if event == "last":
-                c = []
+            '''if event == "last":
+                c = [0,0,0]
                 c[0] =""
                 c[1] = card[0]
                 c[2] = card[1]
+                print(predictions)
+                print(c)
+                print(lastPlayerScored)
+                print(playerScorecards)
                 bonusplayer, bonuspoints = preRoundScoring(predictions,c,lastPlayerScored,scorecards)
-                messagebox.showinfo("Last card winner", ""+bonusplayer+" was awarded "+bonuspoints+" bonus points")
+                messagebox.showinfo("Last card winner, "+bonusplayer+" was awarded "+str(bonuspoints)+" bonus points")
 
                 gameScores = endRoundScoring(playerScorecards, bonusplayer, bonuspoints, playerNames, gameScores)
 
                 print(gameScores)
-                displayLastGrid()
-                return
+                runRound()
+                return'''
             #print("Card clicked: ", card)
             #Show a another small window that allows the plyer what the the flipped card might be
             #The player has a drop down menu with all the showcards to select from
@@ -252,11 +283,11 @@ def runRound():
                 if str(showcards[cardI][3]) == '0' and analyse_grid(showcards) == False:
                     cardList[cardI].bind("<ButtonRelease>", lambda event, card=showcards[cardI]: onCardClick(event, card))
 
-                #Last card left
+                '''#Last card left
                 if(analyse_grid(showcards) == True):
                     print("Last card left")
                     messagebox.showinfo("Last Card Left", "Click to reveal last card")
-                    onCardClick("last", showcards[cardI])
+                    onCardClick("last", showcards[cardI])'''
                 cardI+=1
         
         scDeckLabel = ttk.Label(frame, text = "Scorecards in Deck "+ str(len(scorecards)))
@@ -311,7 +342,8 @@ def runRound():
             confirmButton.pack(side = "top", pady=5)
         else:
             displayGrid(0)  
-        
+    global roundsPlayed
+    roundsPlayed += 1       
     getPreRoundPredictions(0)
 
 
@@ -319,21 +351,30 @@ def runRound():
 #It will ask for the number of players and their names
 def setupGame():
     clearFrame()
-    global roundScores
-    global playerScorecards
 
     #Sets the scores for all players for a ROUND to 0
     def readyRound():
+        global showcards
+        global scorecards
+        showcards = getShowcards()
+        scorecards = getScorecards()
         for name in playerNames:
             playerScorecards[name] = []
             roundScores[name] = 0
+        if roundsPlayed == noOfPlayers:
+            print("Game Over")
+            print(gameScores)
         runRound()
 
     #Set the names of players
     def setNames():
         global playerNames
+        global gameScores
+        gameScores = {}
         for entry in nameEntries:
             playerNames.append(entry.get())
+            gameScores[entry.get()] = 0
+        random.shuffle(playerNames)
         readyRound()
 
     #Ask for the names of all players
