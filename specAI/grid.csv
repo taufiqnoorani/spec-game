@@ -1,0 +1,6 @@
+,0,1,2,3,4
+0,"[' Ace ', 'Spades', 0]","['  10 ', 'Diamonds', 0]","['Queen', 'Diamonds', 0]","['Queen', 'Spades', 0]","['  2  ', 'Diamonds', 0]"
+1,"['Jack ', 'Hearts', 0]","['Queen', 'Clubs', 0]","['Jack ', 'Spades', 0]","[' Ace ', 'Diamonds', 0]","['King ', 'Spades', 0]"
+2,"['King ', 'Clubs', 0]","['  2  ', 'Spades', 0]","['Queen', 'Hearts', 0]","['Jack ', 'Diamonds', 0]","['  2  ', 'Hearts', 0]"
+3,"['Joker ', 'Joker', 0]","['  10 ', 'Hearts', 0]","[' Ace ', 'Hearts', 0]","['King ', 'Hearts', 0]","['King ', 'Diamonds', 0]"
+4,"['  2  ', 'Clubs', 0]","['Jack ', 'Clubs', 0]","['  10 ', 'Spades', 0]","['  10 ', 'Clubs', 0]","[' Ace ', 'Clubs', 0]"

@@ -1,0 +1,25 @@
+<h1>Choose Your Game Mode</h1>
+<form method="post">
+    {% csrf_token %}
+    <label><input type="radio" name="choice" value="1"> Human vs Human</label><br>
+    <label><input type="radio" name="choice" value="2"> Human vs AI</label><br>
+    <div id="ai_difficulty" style="display: none;">
+        Choose AI difficulty level:
+        <select name="difficulty">
+            <option value="1">Easy</option>
+            <option value="2">Medium</option>
+            <option value="3">Hard</option>
+        </select>
+    </div>
+    <button type="submit">Start Game</button>
+</form>
+
+<script>
+document.querySelector('input[name="choice"]').addEventListener('change', function() {
+    if (this.value === '2') {
+        document.getElementById('ai_difficulty').style.display = 'block';
+    } else {
+        document.getElementById('ai_difficulty').style.display = 'none';
+    }
+});
+</script>
